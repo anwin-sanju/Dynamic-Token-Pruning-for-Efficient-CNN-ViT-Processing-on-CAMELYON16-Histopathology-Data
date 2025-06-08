@@ -1,0 +1,11 @@
+torch>=1.10
+torchvision
+timm
+openslide-python
+opencv-python
+numpy
+matplotlib
+scikit-learn
+xmltodict
+pyvips
+streamlit
