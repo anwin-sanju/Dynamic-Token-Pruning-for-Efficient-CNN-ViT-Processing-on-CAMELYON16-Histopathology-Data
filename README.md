@@ -1,10 +1,10 @@
-# 📁 cnn-vit-camelyon16-token-pruning
+# cnn-vit-camelyon16-token-pruning
 
-A template repository for the project: **Dynamic Token Pruning for Efficient CNN-ViT Processing on CAMELYON16 Histopathology Data**
+**Dynamic Token Pruning for Efficient CNN-ViT Processing on CAMELYON16 Histopathology Data**
 
 ---
 
-## 📄 Description
+## Description
 
 This repository presents a lightweight, efficient architecture for histopathology image classification on the CAMELYON16 dataset. We combine the spatial awareness of Convolutional Neural Networks (CNNs) with the global attention of Vision Transformers (ViTs), guided by a novel **dynamic token pruning strategy**.
 
