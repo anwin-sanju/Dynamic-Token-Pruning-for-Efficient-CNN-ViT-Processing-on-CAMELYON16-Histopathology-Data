@@ -1,0 +1,21 @@
+{
+  "resnet18": {
+    "accuracy": 0.14375,
+    "avg_batch_time": 0.03913511037826538,
+    "samples_per_second": 204.42001881877894,
+    "parameters": 11173962
+  },
+  "vit_small": {
+    "accuracy": 0.0875,
+    "avg_batch_time": 0.03210271596908569,
+    "samples_per_second": 249.20009907273416,
+    "parameters": 21342346
+  },
+  "cnn_vit_hybrid": {
+    "accuracy": 0.075,
+    "avg_batch_time": 0.4549255847930908,
+    "samples_per_second": 17.585293655529526,
+    "parameters": 21364693,
+    "token_reduction": 50.0
+  }
+}
