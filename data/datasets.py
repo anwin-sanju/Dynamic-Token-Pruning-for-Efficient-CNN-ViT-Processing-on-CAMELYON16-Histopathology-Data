@@ -179,29 +179,51 @@ class PatchCIFAR10(torchvision.datasets.CIFAR10):
                 positions.append([i, j])
         return torch.tensor(positions, dtype=torch.long)
 
-class HybridCIFAR10(PatchCIFAR10):
-    """Extended CIFAR-10 dataset for CNN-ViT hybrid training"""
+class HybridCIFAR10(torchvision.datasets.CIFAR10):
+    """
+    Extended CIFAR-10 dataset for CNN-ViT hybrid training
+    CRITICAL FIX: Direct inheritance from base CIFAR10 to avoid transform conflicts
+    """
     
     def __init__(self, root: str, train: bool = True, transform=None,
                  target_transform=None, download: bool = False, patch_size: int = 4,
                  cnn_transform=None):
-        super().__init__(root, train, transform, target_transform, download, patch_size)
-        self.cnn_transform = cnn_transform or transform
+        # Initialize base CIFAR10 class WITHOUT any transforms initially
+        super().__init__(root, train, None, target_transform, download)
         
+        # Store transforms separately
+        self.vit_transform = transform
+        self.cnn_transform = cnn_transform or transform
+        self.patch_size = patch_size
+        
+        # Calculate patch information
+        self.img_size = 32
+        if self.img_size % patch_size != 0:
+            raise ValueError(f"Image size {self.img_size} must be divisible by patch size {patch_size}")
+        
+        self.num_patches = (self.img_size // patch_size) ** 2
+        self.patches_per_side = self.img_size // patch_size
+        
+        print(f"HybridCIFAR10 initialized: {self.num_patches} patches per image ({self.patches_per_side}x{self.patches_per_side} grid)")
+    
     def __getitem__(self, index: int) -> Dict[str, Any]:
         """
         Returns data for both CNN and ViT processing
+        CRITICAL FIX: Get raw PIL image first, then apply transforms separately
         """
-        # Get base image without transform for dual processing
-        img, target = torchvision.datasets.CIFAR10.__getitem__(self, index)
+        # Get raw PIL image and target from base CIFAR10 class
+        # This ensures we always start with a PIL Image
+        img, target = super().__getitem__(index)
         
-        # Apply CNN transform (with augmentation for training)
-        cnn_img = self.cnn_transform(img) if self.cnn_transform else self.transform(img)
+        # Verify we have a PIL Image (safety check)
+        if not hasattr(img, 'mode'):  # PIL Images have .mode attribute
+            raise TypeError(f"Expected PIL Image, got {type(img)}. Check dataset setup.")
         
-        # Apply ViT transform (typically without augmentation)
-        vit_img = self.transform(img)
+        # Apply transforms to the same PIL image separately
+        cnn_img = self.cnn_transform(img)
+        vit_img = self.vit_transform(img)
         
-        # Extract patches for ViT
+        # Extract patches for ViT from the transformed image
         patches = self._extract_patches(vit_img)
         patch_positions = self._get_patch_positions()
         
@@ -213,6 +235,27 @@ class HybridCIFAR10(PatchCIFAR10):
             'num_patches': self.num_patches,
             'patch_positions': patch_positions
         }
+    
+    def _extract_patches(self, img: torch.Tensor) -> torch.Tensor:
+        """Extract non-overlapping patches from image"""
+        # img shape: [C, H, W]
+        C, H, W = img.shape
+        p = self.patch_size
+        
+        # Reshape to patches: [num_patches, C, patch_size, patch_size]
+        patches = img.unfold(1, p, p).unfold(2, p, p)  # [C, H/p, W/p, p, p]
+        patches = patches.permute(1, 2, 0, 3, 4).contiguous()  # [H/p, W/p, C, p, p]
+        patches = patches.view(-1, C, p, p)  # [num_patches, C, p, p]
+        
+        return patches
+    
+    def _get_patch_positions(self) -> torch.Tensor:
+        """Get 2D positions of patches for positional embeddings"""
+        positions = []
+        for i in range(self.patches_per_side):
+            for j in range(self.patches_per_side):
+                positions.append([i, j])
+        return torch.tensor(positions, dtype=torch.long)
 
 def create_data_loaders(config, loader_type: str = "standard") -> Tuple[DataLoader, DataLoader]:
     """
@@ -227,6 +270,9 @@ def create_data_loaders(config, loader_type: str = "standard") -> Tuple[DataLoad
     """
     handler = CIFAR10Handler(data_dir=config.data_dir, download=True)
     
+    # Disable pin_memory for MPS devices to avoid warnings
+    use_pin_memory = not (config.device == 'mps')
+    
     if loader_type == "standard":
         return handler.get_standard_loaders(
             batch_size=config.batch_size,
@@ -239,7 +285,7 @@ def create_data_loaders(config, loader_type: str = "standard") -> Tuple[DataLoad
             num_workers=config.num_workers
         )
     elif loader_type == "hybrid":
-        # For hybrid training, we'll use a custom dataset
+        # For hybrid training using the completely fixed HybridCIFAR10 dataset
         train_dataset = HybridCIFAR10(
             root=config.data_dir,
             train=True,
@@ -263,7 +309,7 @@ def create_data_loaders(config, loader_type: str = "standard") -> Tuple[DataLoad
             batch_size=config.batch_size,
             shuffle=True,
             num_workers=config.num_workers,
-            pin_memory=True
+            pin_memory=use_pin_memory
         )
         
         test_loader = DataLoader(
@@ -271,7 +317,7 @@ def create_data_loaders(config, loader_type: str = "standard") -> Tuple[DataLoad
             batch_size=config.batch_size,
             shuffle=False,
             num_workers=config.num_workers,
-            pin_memory=True
+            pin_memory=use_pin_memory
         )
         
         print(f"✅ Hybrid CIFAR-10 loaders created for CNN-ViT training")

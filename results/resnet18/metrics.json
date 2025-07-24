@@ -1,0 +1,110 @@
+{
+  "model_name": "resnet18",
+  "config": {
+    "dataset": "cifar10",
+    "data_dir": "data/raw/cifar10",
+    "num_classes": 10,
+    "batch_size": 32,
+    "num_workers": 4,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "device": "mps",
+    "mixed_precision": false,
+    "log_interval": 50,
+    "save_interval": 10,
+    "checkpoint_dir": "results",
+    "use_tensorboard": true,
+    "use_wandb": false,
+    "img_size": 32,
+    "patch_size": 4,
+    "model_name": "resnet18",
+    "pretrained": true,
+    "dropout": 0.1,
+    "modify_for_cifar": true,
+    "pin_memory": true
+  },
+  "training_history": {
+    "train_loss": [
+      1.0021779400869126
+    ],
+    "train_acc": [
+      0.6555102367242482
+    ],
+    "val_loss": [
+      0.8027040020535929
+    ],
+    "val_acc": [
+      0.7257
+    ],
+    "learning_rates": [
+      1e-06
+    ]
+  },
+  "best_accuracy": 0.7257,
+  "final_metrics": {
+    "performance": {
+      "accuracy": 0.7257,
+      "precision_macro": 0.7587394742384906,
+      "recall_macro": 0.7257,
+      "f1_macro": 0.7220730953757378,
+      "precision_micro": 0.7257,
+      "recall_micro": 0.7257,
+      "f1_micro": 0.7257,
+      "precision_class_0": 0.7874564459930313,
+      "recall_class_0": 0.678,
+      "f1_class_0": 0.7286405158516926,
+      "precision_class_1": 0.9608177172061328,
+      "recall_class_1": 0.564,
+      "f1_class_1": 0.7107750472589792,
+      "precision_class_2": 0.7848275862068965,
+      "recall_class_2": 0.569,
+      "f1_class_2": 0.6597101449275362,
+      "precision_class_3": 0.5926940639269407,
+      "recall_class_3": 0.649,
+      "f1_class_3": 0.6195704057279237,
+      "precision_class_4": 0.7001675041876047,
+      "recall_class_4": 0.836,
+      "f1_class_4": 0.7620783956244302,
+      "precision_class_5": 0.8731884057971014,
+      "recall_class_5": 0.482,
+      "f1_class_5": 0.6211340206185567,
+      "precision_class_6": 0.7444933920704846,
+      "recall_class_6": 0.845,
+      "f1_class_6": 0.7915690866510539,
+      "precision_class_7": 0.718562874251497,
+      "recall_class_7": 0.84,
+      "f1_class_7": 0.7745504840940526,
+      "precision_class_8": 0.8601694915254238,
+      "recall_class_8": 0.812,
+      "f1_class_8": 0.8353909465020576,
+      "precision_class_9": 0.5650172612197929,
+      "recall_class_9": 0.982,
+      "f1_class_9": 0.7173119065010957
+    },
+    "efficiency": {
+      "avg_batch_time": 0.027080877139545476,
+      "std_batch_time": 0.004492452188477494,
+      "total_inference_time": 8.476314544677734,
+      "avg_throughput": 1188.939788488312,
+      "max_throughput": 1233.3694289757586,
+      "min_throughput": 303.07580862229366,
+      "avg_memory_mb": 208.49026791508587,
+      "peak_memory_mb": 208.709716796875,
+      "min_memory_mb": 208.272216796875
+    },
+    "combined": {
+      "accuracy_per_second": 26.797507195225958,
+      "f1_per_mb": 0.0034633419708099975
+    }
+  },
+  "model_info": {
+    "model_name": "ResNet18Baseline",
+    "total_parameters": 11173962,
+    "trainable_parameters": 11173962,
+    "num_classes": 10,
+    "feature_dim": 512
+  }
+}

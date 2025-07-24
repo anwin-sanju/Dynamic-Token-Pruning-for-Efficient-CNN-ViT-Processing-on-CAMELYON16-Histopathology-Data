@@ -258,6 +258,20 @@ class PatchResNet18ROIScorer(nn.Module):
         classification = classification.view(batch_size, num_patches, self.num_classes)
         
         return importance, classification
+    
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get model information for logging"""
+        total_params = sum(p.numel() for p in self.parameters())
+        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        
+        return {
+            'model_name': 'PatchResNet18ROIScorer',
+            'total_parameters': total_params,
+            'trainable_parameters': trainable_params,
+            'num_classes': self.num_classes,
+            'feature_dim': self.feature_dim,
+            'patch_size': self.patch_size
+        }
 
 def create_resnet_model(model_type: str, config) -> nn.Module:
     """

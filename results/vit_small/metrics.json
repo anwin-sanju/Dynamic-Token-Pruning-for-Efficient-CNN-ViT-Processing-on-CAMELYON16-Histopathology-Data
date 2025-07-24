@@ -1,0 +1,117 @@
+{
+  "model_name": "vit_small",
+  "config": {
+    "dataset": "cifar10",
+    "data_dir": "data/raw/cifar10",
+    "num_classes": 10,
+    "batch_size": 16,
+    "num_workers": 4,
+    "epochs": 1,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "device": "mps",
+    "mixed_precision": false,
+    "log_interval": 50,
+    "save_interval": 10,
+    "checkpoint_dir": "results",
+    "use_tensorboard": true,
+    "use_wandb": false,
+    "img_size": 32,
+    "patch_size": 4,
+    "model_name": "vit_small",
+    "pretrained": true,
+    "embed_dim": 384,
+    "depth": 12,
+    "num_heads": 6,
+    "dropout": 0.1,
+    "pos_embed_type": "learned",
+    "pin_memory": true
+  },
+  "training_history": {
+    "train_loss": [
+      2.1625472383880617
+    ],
+    "train_acc": [
+      0.17412
+    ],
+    "val_loss": [
+      2.0797955574035645
+    ],
+    "val_acc": [
+      0.1922
+    ],
+    "learning_rates": [
+      1e-06
+    ]
+  },
+  "best_accuracy": 0.1922,
+  "final_metrics": {
+    "performance": {
+      "accuracy": 0.1922,
+      "precision_macro": 0.11346904576293393,
+      "recall_macro": 0.1922,
+      "f1_macro": 0.12399423661239403,
+      "precision_micro": 0.1922,
+      "recall_micro": 0.1922,
+      "f1_micro": 0.1922,
+      "precision_class_0": 0.12337662337662338,
+      "recall_class_0": 0.095,
+      "f1_class_0": 0.10734463276836158,
+      "precision_class_1": 0.0,
+      "recall_class_1": 0.0,
+      "f1_class_1": 0.0,
+      "precision_class_2": 0.11776691116544417,
+      "recall_class_2": 0.289,
+      "f1_class_2": 0.1673422119281992,
+      "precision_class_3": 0.2,
+      "recall_class_3": 0.006,
+      "f1_class_3": 0.011650485436893204,
+      "precision_class_4": 0.0,
+      "recall_class_4": 0.0,
+      "f1_class_4": 0.0,
+      "precision_class_5": 0.0,
+      "recall_class_5": 0.0,
+      "f1_class_5": 0.0,
+      "precision_class_6": 0.2682926829268293,
+      "recall_class_6": 0.55,
+      "f1_class_6": 0.36065573770491804,
+      "precision_class_7": 0.0,
+      "recall_class_7": 0.0,
+      "f1_class_7": 0.0,
+      "precision_class_8": 0.2645043398812243,
+      "recall_class_8": 0.579,
+      "f1_class_8": 0.36312323612417685,
+      "precision_class_9": 0.16074990027921818,
+      "recall_class_9": 0.403,
+      "f1_class_9": 0.2298260621613915
+    },
+    "efficiency": {
+      "avg_batch_time": 0.051798129272460934,
+      "std_batch_time": 0.004304951907120003,
+      "total_inference_time": 32.373830795288086,
+      "avg_throughput": 309.79992253686913,
+      "max_throughput": 315.9060221340375,
+      "min_throughput": 108.50190782921372,
+      "avg_memory_mb": 517.82958984375,
+      "peak_memory_mb": 517.82958984375,
+      "min_memory_mb": 517.82958984375
+    },
+    "combined": {
+      "accuracy_per_second": 3.7105587151423505,
+      "f1_per_mb": 0.00023944988668918684
+    }
+  },
+  "model_info": {
+    "model_name": "ViTSmallCustom",
+    "total_parameters": 21342346,
+    "trainable_parameters": 21342346,
+    "num_classes": 10,
+    "embed_dim": 384,
+    "depth": 12,
+    "num_heads": 6,
+    "num_patches": 64,
+    "max_tokens": 64
+  }
+}

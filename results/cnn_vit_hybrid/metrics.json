@@ -1,0 +1,142 @@
+{
+  "model_name": "cnn_vit_hybrid",
+  "config": {
+    "dataset": "cifar10",
+    "data_dir": "data/raw/cifar10",
+    "num_classes": 10,
+    "batch_size": 8,
+    "num_workers": 4,
+    "epochs": 50,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "device": "mps",
+    "mixed_precision": false,
+    "log_interval": 50,
+    "save_interval": 10,
+    "checkpoint_dir": "results",
+    "use_tensorboard": true,
+    "use_wandb": false,
+    "img_size": 32,
+    "patch_size": 4,
+    "model_name": "cnn_vit_hybrid",
+    "cnn_pretrained": true,
+    "freeze_cnn_stage2": true,
+    "pruning_ratio": 0.5,
+    "selection_method": "top_k",
+    "min_tokens": 16,
+    "vit_pretrained": true,
+    "embed_dim": 384,
+    "depth": 12,
+    "num_heads": 6,
+    "two_stage_training": true,
+    "stage1_epochs": 2,
+    "stage2_epochs": 2,
+    "classification_weight": 1.0,
+    "efficiency_weight": 0.1,
+    "pin_memory": true
+  },
+  "training_history": {
+    "stage1": {
+      "train_loss": [
+        1.8998316733551026,
+        1.7282341506767274
+      ],
+      "train_acc": [
+        0.29382,
+        0.3675
+      ],
+      "val_loss": [
+        1.7341624516010283,
+        1.643914629125595
+      ],
+      "val_acc": [
+        0.3599,
+        0.392
+      ]
+    },
+    "stage2": {
+      "train_loss": [
+        1.9666681772613526,
+        1.729051936197281
+      ],
+      "train_acc": [
+        0.3145,
+        0.41226
+      ],
+      "val_loss": [
+        1.736091156721115,
+        1.5694415900230407
+      ],
+      "val_acc": [
+        0.3696,
+        0.4339
+      ]
+    },
+    "learning_rates": [],
+    "token_reduction_stats": [
+      {
+        "avg_original_tokens": 64.0,
+        "avg_selected_tokens": 8.0,
+        "avg_token_reduction_rate": 0.875,
+        "avg_token_reduction_percentage": 87.5,
+        "std_token_reduction_rate": 0.0,
+        "min_selected_tokens": 8,
+        "max_selected_tokens": 8,
+        "computational_savings": 0.875,
+        "avg_importance_mean": 0.4706846517324448,
+        "avg_importance_std": 0.04367735535800457,
+        "importance_consistency": 0.9929826485134081
+      },
+      {
+        "avg_original_tokens": 64.0,
+        "avg_selected_tokens": 8.0,
+        "avg_token_reduction_rate": 0.875,
+        "avg_token_reduction_percentage": 87.5,
+        "std_token_reduction_rate": 0.0,
+        "min_selected_tokens": 8,
+        "max_selected_tokens": 8,
+        "computational_savings": 0.875,
+        "avg_importance_mean": 0.4705009955406189,
+        "avg_importance_std": 0.044195542842149736,
+        "importance_consistency": 0.9929264059532452
+      }
+    ]
+  },
+  "best_accuracy": 0.4339,
+  "model_info": {
+    "model_name": "CNNViTHybrid",
+    "total_parameters": 21364693,
+    "trainable_parameters": 21342346,
+    "cnn_parameters": 22347,
+    "vit_parameters": 21342346,
+    "num_classes": 10,
+    "pruning_ratio": 0.5,
+    "num_patches": 64,
+    "num_selected": 32,
+    "selection_method": "top_k",
+    "training_stage": 2,
+    "efficiency_metrics": {
+      "original_tokens": 64,
+      "selected_tokens": 32,
+      "pruning_ratio": 0.5,
+      "token_reduction_rate": 0.5,
+      "computational_savings": 0.5,
+      "tokens_per_image": 32
+    }
+  },
+  "efficiency_metrics": {
+    "original_tokens": 64,
+    "selected_tokens": 32,
+    "pruning_ratio": 0.5,
+    "token_reduction_rate": 0.5,
+    "computational_savings": 0.5,
+    "tokens_per_image": 32
+  },
+  "research_summary": {
+    "token_reduction_achieved": "50.0%",
+    "computational_savings": 0.5,
+    "parameter_count": 21364693
+  }
+}
