@@ -17,35 +17,6 @@ Demonstrate that CNN-ViT dynamic token pruning:
 - Reduces computational cost through intelligent token selection
 - Achieves superior accuracy-efficiency trade-offs
 
-## 🏗️ Project Structure
-
-cnn_vit_token_pruning/
-├── models/ # Model implementations
-│ ├── resnet18.py # CNN baseline
-│ ├── vit_small.py # ViT baseline
-│ ├── cnn_vit_hybrid.py # Hybrid architecture
-│ └── model_factory.py # Model creation utilities
-├── experiments/ # Training scripts
-│ ├── train_resnet18.py # CNN training
-│ ├── train_vit_small.py # ViT training
-│ ├── train_hybrid.py # Hybrid training
-│ └── compare_models.py # Model comparison
-├── evaluation/ # Evaluation tools
-│ ├── metrics.py # Performance metrics
-│ ├── evaluator.py # Model evaluation
-│ └── comparator.py # Cross-model comparison
-├── results/ # Training outputs
-│ ├── resnet18/ # CNN results
-│ ├── vit_small/ # ViT results
-│ ├── cnn_vit_hybrid/ # Hybrid results
-│ └── comparison/ # Comparative analysis
-├── config/ # Configuration files
-├── utils/ # Helper utilities
-├── data/ # Dataset management
-└── notebooks/ # Jupyter analysis notebooks
-
-text
-
 ## 🚀 Quick Start
 
 ### Environment Setup
