@@ -2,7 +2,7 @@
 
 A research implementation comparing CNN, Vision Transformer (ViT), and CNN-ViT hybrid architectures with dynamic token pruning for efficient medical image classification.
 
-## 🎯 Project Overview
+## Project Overview
 
 This project implements and compares three model architectures for image classification:
 
@@ -17,7 +17,7 @@ Demonstrate that CNN-ViT dynamic token pruning:
 - Reduces computational cost through intelligent token selection
 - Achieves superior accuracy-efficiency trade-offs
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Environment Setup
 
@@ -59,7 +59,7 @@ python experiments/compare_models.py
 
 text
 
-## 📊 Development Workflow
+## Development Workflow
 
 ### Prototype Phase (Current)
 - **Dataset**: CIFAR-10 for rapid prototyping
@@ -71,7 +71,7 @@ text
 - **Preprocessing**: Patch extraction with tissue segmentation
 - **Scaling**: GPU cluster deployment for large-scale evaluation
 
-## 🔬 Technical Implementation
+## Technical Implementation
 
 ### CNN-ViT Hybrid Architecture
 
@@ -93,7 +93,7 @@ text
 - **Loss function**: Classification loss + token efficiency penalty
 - **Optimization**: AdamW with cosine annealing schedule
 
-## 📈 Expected Results
+## Expected Results
 
 | Model | Accuracy | Inference Speed | Memory Usage | Token Reduction |
 |-------|----------|-----------------|--------------|-----------------|
@@ -101,7 +101,7 @@ text
 | ViT-Small | ~98% | Medium | High | 0% |
 | CNN-ViT Hybrid | ~97-98% | High | Medium | 40-60% |
 
-## 🛠️ Development Notes
+## Development Notes
 
 ### Hardware Optimization
 - **M1 MacBook Air**: Optimized for Apple Silicon with MPS backend
@@ -114,7 +114,7 @@ text
 - **OpenSlide**: WSI preprocessing capabilities (future scaling)
 - **Albumentations**: Advanced image augmentations
 
-## 📚 Research Context
+## Research Context
 
 This implementation supports research into:
 - **Efficient Vision Transformers**: Reducing computational overhead
@@ -122,7 +122,7 @@ This implementation supports research into:
 - **Hybrid Architectures**: Combining CNN and ViT strengths
 - **Dynamic Token Pruning**: Adaptive attention mechanisms
 
-## 🤝 Contributing
+## Contributing
 
 This is a research prototype. Key areas for contribution:
 - Model architecture improvements
@@ -130,11 +130,11 @@ This is a research prototype. Key areas for contribution:
 - Visualization tools for attention analysis
 - Documentation and code cleanup
 
-## 📄 License
+## License
 
 MIT License - see LICENSE file for details.
 
-## 🔗 Citation
+## Citation
 
 If you use this code in your research, please cite:
 
@@ -149,4 +149,4 @@ text
 
 ---
 
-**Status**: 🚧 Active Development | **Phase**: Prototype Implementation | **Target**: Research Publication
+**Status**: Active Development | **Phase**: Prototype Implementation | **Target**: Research Publication
